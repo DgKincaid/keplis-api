@@ -3,10 +3,10 @@ GET http://localhost:3000/auth
 
 ###
 POST http://localhost:3000/auth/register
-Content-Type: application/vnd.api+json
+Content-Type: application/json
 
 {
-  "email": "test@test123.com",
+  "email": "test@test.com",
   "firstName": "John",
   "lastName": "Wick",
   "password": "password"
@@ -17,6 +17,6 @@ PATCH http://localhost:3000/auth/login
 Content-Type: application/json
 
 {
-  "email": "john",
-  "password": "changeme"
+  "email": "test@test.com",
+  "password": "password"
 }

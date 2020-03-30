@@ -1,10 +1,12 @@
-import { Controller, Request, Post, Body, Patch, UseGuards } from '@nestjs/common';
+import { Controller, Request, Post, Body, Patch, UseGuards, UsePipes, BadRequestException } from '@nestjs/common';
 import { ApiTags, ApiResponse } from '@nestjs/swagger';
-import { AuthGuard } from '@nestjs/passport';
 
 import { RegisterAuthDto, ResponseAuthDto } from './dto';
+import { RegisterAuthSchema } from './schema';
+
 import { AuthService } from './auth.service';
-import { LocalAuthGuard } from './local-auth.guard';
+import { LocalAuthGuard } from './guards';
+import { JoiValidationPipe } from '../../pipes/joi-validation.pipe';
 
 @ApiTags('auth')
 @Controller('auth')
@@ -15,19 +17,21 @@ export class AuthController {
   @Post('register')
   @ApiResponse({ status: 201, description: 'The record has been successfully created.'})
   @ApiResponse({ status: 400, description: 'Bad Request.'})
-  public register(@Body() authRegister: RegisterAuthDto): ResponseAuthDto {
-    console.log(authRegister);
-    const auth: ResponseAuthDto = {
-      token: 'test',
-      user: { }
+  @UsePipes(new JoiValidationPipe(RegisterAuthSchema))
+  public async register(@Body() authRegister: RegisterAuthDto) {
+
+    const newUser = await this.authService.register(authRegister);
+
+    if(newUser) {
+      return newUser;
     }
 
-    return auth;
+    throw new BadRequestException('Duplicate email');
   }
 
-  @UseGuards(LocalAuthGuard)
   @Patch('login')
-  public async login(@Request() req) {
-    return this.authService.login(req.user);
+  @UseGuards(LocalAuthGuard)
+  public async login(@Body() credentials) {
+    return this.authService.login(credentials)
   }
 }
