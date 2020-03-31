@@ -6,6 +6,7 @@ import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { LocalStrategy } from './strategy';
 import { UsersModule } from '../users/users.module';
+import { IUser } from '../users/interfaces/IUser';
 
 class AuthServiceMock {
   validateUser() {
@@ -29,10 +30,11 @@ describe('AuthController', () => {
       controllers: [ AuthController ],
       providers: [
         LocalStrategy,
-        {
-          provide: AuthService,
-          useValue: AuthServiceMock,
-        }
+        AuthService
+        // {
+        //   provide: AuthService,
+        //   useValue: AuthServiceMock,
+        // }
       ],
       imports: [
         JwtModule.register({
@@ -45,7 +47,7 @@ describe('AuthController', () => {
     }).compile();
 
     authController = moduleRef.get<AuthController>(AuthController);
-    // authService = moduleRef.get<AuthService>(AuthService);
+    authService = moduleRef.get<AuthService>(AuthService);
   })
 
   describe('register', () => {
@@ -63,9 +65,50 @@ describe('AuthController', () => {
         lastName: 'Wick',
       };
 
-      let user = authController.register(registerReq);
+      jest.spyOn(authService, 'register').mockResolvedValue(result as IUser);
+      let user = await authController.register(registerReq);
+    })
 
-      console.log(user);
+    it('should return a duplicate email error', async () => {
+      const result = {
+        email: 'john@comcast.com',
+        firstName: 'John',
+        lastName: 'Wick',
+      };
+      let err;
+
+      jest.spyOn(authService, 'register').mockResolvedValue(null);
+      try {
+        await authController.register(registerReq);
+      } catch (error) {
+        err = error;
+      }
+
+      expect(err).toBeDefined();
+      expect(err.status).toEqual(400);
+      expect(err.message).toEqual('Duplicate email');
+    })
+  })
+
+  describe('login', () => {
+    const loginReq = {
+      email: 'john@comcast.com',
+      password: 'password1234'
+    }
+
+    it('should return a 200 + auth response', async() => {
+      const result = {
+        token: '',
+        user: {
+          email: 'john@comcast.com',
+          firstName: 'John',
+          lastName: 'Wick',
+        } as IUser
+      }
+
+      jest.spyOn(authService, 'login').mockResolvedValue(result);
+
+      let authToken = await authController.login(loginReq);
     })
   })
 })
