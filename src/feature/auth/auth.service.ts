@@ -11,7 +11,8 @@ export class AuthService {
 
   constructor(
     private jwtService: JwtService,
-    private usersService: UsersService,) {}
+    private usersService: UsersService,
+  ) {}
 
   public async validateUser(email: string, pass: string) {
     const user = await this.usersService.findOnePassword(email);
@@ -27,6 +28,7 @@ export class AuthService {
       }
 
     } catch (error) {
+      // TODO: add api logging
       throw new BadRequestException('Email or password incorrect');
     }
 
