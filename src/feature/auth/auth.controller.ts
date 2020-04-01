@@ -31,6 +31,8 @@ export class AuthController {
 
   @Patch('login')
   @UseGuards(LocalAuthGuard)
+  @ApiResponse({ status: 200, description: 'Logged in Successfuly.'})
+  @ApiResponse({ status: 400, description: 'Bad Request.'})
   public async login(@Body() credentials) {
     return this.authService.login(credentials)
   }

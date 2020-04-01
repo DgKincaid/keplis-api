@@ -8,17 +8,6 @@ import { LocalStrategy } from './strategy';
 import { UsersModule } from '../users/users.module';
 import { IUser } from '../users/interfaces/IUser';
 
-class AuthServiceMock {
-  validateUser() {
-    return null;
-  }
-
-  register() {
-    console.log('register');
-    return null;
-  }
-}
-
 jest.mock('./auth.service')
 describe('AuthController', () => {
   let authController: AuthController;
