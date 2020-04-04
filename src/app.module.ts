@@ -6,6 +6,12 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
 import { AuthModule, UsersModule } from './feature';
+import { StoryModule } from './feature/story/story.module';
+import { GroupsModule } from './feature/groups/groups.module';
+import { TasksModule } from './feature/tasks/tasks.module';
+import { SprintModule } from './feature/sprint/sprint.module';
+import { CommentModule } from './feature/comment/comment.module';
+import { ProjectModule } from './feature/project/project.module';
 
 @Module({
   imports: [
@@ -20,7 +26,13 @@ import { AuthModule, UsersModule } from './feature';
       inject: [ ConfigService ]
     }),
     AuthModule,
-    UsersModule
+    UsersModule,
+    StoryModule,
+    GroupsModule,
+    TasksModule,
+    SprintModule,
+    CommentModule,
+    ProjectModule
   ],
   controllers: [AppController],
   providers: [AppService],
