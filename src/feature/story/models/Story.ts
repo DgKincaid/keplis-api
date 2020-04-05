@@ -14,7 +14,7 @@ export const StorySchema: Schema = new Schema({
 
   comments: [ { type: Schema.Types.ObjectId, ref: 'Comment' } ],
 
-  tasks: [ { type: Schema.Types.ObjectId, ref: 'Task' } ],
+  tasks: { type: Map, of: Schema.Types.ObjectId, ref: 'Task' },
 
   sprint: { type: Schema.Types.ObjectId, ref: 'Sprint' },
 

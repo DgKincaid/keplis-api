@@ -30,8 +30,12 @@ export class UsersService {
 
   public async create(user: IUser) {
     user.lastLoginDttm = new Date();
+    user.organizations = new Map();
+    user.groups = new Map();
 
-    return this.userModel.create(user);
+    let createdUser = await this.userModel.create(user);
+
+    return await this.userModel.findById(createdUser._id);
   }
 
   public findAll() {
@@ -75,5 +79,33 @@ export class UsersService {
     }
 
     return updatedUser;
+  }
+
+  public async addOrganization(id: string, organizationId: string) {
+
+    console.log(typeof organizationId);
+    try {
+      let user: IUser = await this.userModel.findById(id);
+
+      user.organizations.set(organizationId, organizationId);
+      await user.save();
+    } catch (error) {
+      console.log(error);
+    }
+
+    return;
+  }
+
+  public async addGroup(id: string, groupId: string) {
+    try {
+      let user: IUser = await this.userModel.findById(id);
+
+      user.groups.set(groupId, groupId);
+      await user.save();
+    } catch (error) {
+      console.log(error);
+    }
+
+    return;
   }
 }

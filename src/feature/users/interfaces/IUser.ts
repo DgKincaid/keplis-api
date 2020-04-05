@@ -6,6 +6,9 @@ export interface IUser extends Document {
   lastName: string,
   password: string,
 
+  groups: Map<string, string>,
+  organizations: Map<string, string>,
+
   createdDttm: Date;
   updatedDttm: Date;
   lastLoginDttm: Date;

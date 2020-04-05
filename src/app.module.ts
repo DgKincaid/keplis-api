@@ -12,6 +12,7 @@ import { TasksModule } from './feature/tasks/tasks.module';
 import { SprintModule } from './feature/sprint/sprint.module';
 import { CommentModule } from './feature/comment/comment.module';
 import { ProjectModule } from './feature/project/project.module';
+import { OrganizationModule } from './feature/organization/organization.module';
 
 @Module({
   imports: [
@@ -32,7 +33,8 @@ import { ProjectModule } from './feature/project/project.module';
     TasksModule,
     SprintModule,
     CommentModule,
-    ProjectModule
+    ProjectModule,
+    OrganizationModule
   ],
   controllers: [AppController],
   providers: [AppService],

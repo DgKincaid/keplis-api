@@ -4,7 +4,6 @@ import { JwtService } from '@nestjs/jwt';
 import { hash, compare } from 'bcrypt';
 
 import { UsersService } from '../users/users.service';
-import { IUser } from '../users/interfaces/IUser';
 
 @Injectable()
 export class AuthService {
@@ -24,6 +23,7 @@ export class AuthService {
 
         const { password, ...result } = user;
 
+        console.log(result);
         return result;
       }
 
@@ -53,8 +53,12 @@ export class AuthService {
       newUser.password = hashedPassword;
 
       const user = await this.usersService.create(newUser);
+      const payload = { email: user.email, sub: user._id };
 
-      return user;
+      return {
+        token: this.jwtService.sign(payload),
+        user
+      };
     }
 
     return null // validation error
