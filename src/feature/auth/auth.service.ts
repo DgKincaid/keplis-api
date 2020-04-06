@@ -23,7 +23,6 @@ export class AuthService {
 
         const { password, ...result } = user;
 
-        console.log(result);
         return result;
       }
 

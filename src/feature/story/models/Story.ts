@@ -24,10 +24,15 @@ export const StorySchema: Schema = new Schema({
 
   group: { type: Schema.Types.ObjectId, ref: 'Group' },
 
-  links: [
-    { type: Schema.Types.ObjectId, ref: 'Story' },
-    { type: String },
-  ]
+  organization: { type: Schema.Types.ObjectId, ref: 'Organization' },
+
+  links: [{
+      storyId: { type: Schema.Types.ObjectId, ref: 'Story' },
+      link: { type: String },
+    }
+  ],
+
+  removedDttm: { type: Date },
 }, {
   timestamps: { createdAt: 'createdDttm', updatedAt: 'updatedDttm' }
 })

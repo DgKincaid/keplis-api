@@ -127,8 +127,11 @@ describe('AuthService', () => {
       jest.spyOn(spyUsersService, 'create').mockResolvedValue(result as IUser);
       jest.spyOn(bcrypt, 'hash').mockResolvedValue('newHashedPassword');
 
-      let newUser = await authService.register(registerUser);
+      let res = await authService.register(registerUser);
+      let newUser = res.user;
+      let token = res.token;
 
+      expect(token).toBeDefined();
       expect(newUser.email).toEqual(result.email);
       expect(newUser.firstName).toEqual(result.firstName);
       expect(newUser.lastName).toEqual(result.lastName);

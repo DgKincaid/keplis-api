@@ -1,4 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { getModelToken } from '@nestjs/mongoose';
+
+import * as faker from 'faker';
+
 import { StoryService } from './story.service';
 
 describe('StoryService', () => {
@@ -6,13 +10,28 @@ describe('StoryService', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [StoryService],
+      providers: [
+        StoryService,
+        {
+          provide: getModelToken('Story'),
+          useFactory: () => ({
+
+          })
+        }
+      ],
     }).compile();
 
     service = module.get<StoryService>(StoryService);
   });
 
-  it('should be defined', () => {
+  test('should be defined', () => {
     expect(service).toBeDefined();
   });
+
+  describe('getAll', () => {
+
+    test('should return array of stories', () => {
+
+    })
+  })
 });
