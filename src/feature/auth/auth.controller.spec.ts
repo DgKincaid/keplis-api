@@ -54,7 +54,12 @@ describe('AuthController', () => {
         lastName: 'Wick',
       };
 
-      jest.spyOn(authService, 'register').mockResolvedValue(result as IUser);
+      var res = {
+        token: '',
+        user: result as IUser
+      }
+      jest.spyOn(authService, 'register').mockResolvedValue(res);
+
       let user = await authController.register(registerReq);
     })
 

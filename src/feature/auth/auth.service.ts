@@ -4,6 +4,7 @@ import { JwtService } from '@nestjs/jwt';
 import { hash, compare } from 'bcrypt';
 
 import { UsersService } from '../users/users.service';
+import { IUser } from '../users/interfaces/IUser';
 
 @Injectable()
 export class AuthService {
@@ -73,6 +74,23 @@ export class AuthService {
       token: this.jwtService.sign(payload),
       user
     };
+  }
+
+  public async validateOrganization(request) {
+    return false;
+  }
+
+  // validates userid in token exists
+  public async validateToken(token) {
+    let user: IUser;
+
+    try {
+      user = await this.usersService.findOneById(token.userId);
+    } catch (error) {
+      console.log(error);
+    }
+
+    return user;
   }
 
   private async updateLogin(id: string) {

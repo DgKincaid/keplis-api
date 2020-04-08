@@ -40,18 +40,17 @@ describe('GroupsService', () => {
   describe('create', () => {
     let reqGroup: Partial<IGroup> = {
       name: faker.name.jobTitle(),
-      owners: [
-        faker.random.uuid(),
-        faker.random.uuid(),
-      ]
+      owners: new Map<string, string>()
     }
+
+    reqGroup.owners.set(faker.random.uuid(), 'test');
+
     it('should create group', async () => {
 
       let newGroup = await service.create(reqGroup as IGroup);
 
       expect(newGroup).toBeDefined();
       expect(newGroup.name).toEqual(createGroup.name);
-      expect(newGroup.owners.length).toBe(1);
     })
   })
 });
