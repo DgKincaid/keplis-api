@@ -17,6 +17,7 @@ import { UserTokenModule } from './guards/user-token/user-token.module';
 import { UserDbModule } from './db/user-db/user-db.module';
 import { CommentDbModule } from './db/comment-db/comment-db.module';
 import { GroupDbModule } from './db/group-db/group-db.module';
+import { OrganizationDbModule } from './db/organization-db/organization-db.module';
 
 @Module({
   imports: [
@@ -42,7 +43,8 @@ import { GroupDbModule } from './db/group-db/group-db.module';
     UserTokenModule,
     UserDbModule,
     CommentDbModule,
-    GroupDbModule
+    GroupDbModule,
+    OrganizationDbModule
   ],
   controllers: [AppController],
   providers: [AppService],

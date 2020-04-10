@@ -1,16 +1,12 @@
 import { Injectable, BadRequestException } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
 
-import { Model } from 'mongoose';
-
-import { IOrganization } from './interfaces/IOrganization';
 import { CreateOrganizationDto } from './dto';
-import { GroupDbService, IGroup, UserDbService } from '../../db';
+import { GroupDbService, IGroup, UserDbService, IOrganization, OrganizationDbService } from '../../db';
 
 @Injectable()
 export class OrganizationService {
   constructor(
-    @InjectModel('Organization') private organizationModel: Model<IOrganization>,
+    private organizationDbService: OrganizationDbService,
     private groupDbService: GroupDbService,
     private userDbService: UserDbService,
   ) { }
@@ -31,7 +27,7 @@ export class OrganizationService {
         group: group._id
       };
 
-      organization = await this.organizationModel.create(newOrg);
+      organization = await this.organizationDbService.create(newOrg as IOrganization);
 
       let user = await this.userDbService.findOneById(userId);
 
@@ -51,7 +47,7 @@ export class OrganizationService {
     let organizations: IOrganization[];
 
     try {
-      organizations = await this.organizationModel.find({});
+      organizations = await this.organizationDbService.findAll();
 
     } catch (error) {
       console.log(error);
@@ -64,7 +60,7 @@ export class OrganizationService {
     let organization: IOrganization;
 
     try {
-      organization = await this.organizationModel.findById(id);
+      organization = await this.organizationDbService.findOneById(id);
 
     } catch (error) {
       console.log(error);

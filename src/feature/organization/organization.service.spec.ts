@@ -1,12 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { getModelToken } from '@nestjs/mongoose';
 
 import * as faker from 'faker';
 
 import { OrganizationService } from './organization.service';
-import { IOrganization } from './interfaces/IOrganization';
 
-import { IGroup, GroupDbService, UserDbService } from '../../db';
+import { IGroup, GroupDbService, UserDbService, IOrganization, OrganizationDbService } from '../../db';
 
 describe('OrganizationService', () => {
   let service: OrganizationService;
@@ -29,9 +27,8 @@ describe('OrganizationService', () => {
       providers: [
         OrganizationService,
         {
-          provide: getModelToken('Organization'),
+          provide: OrganizationDbService,
           useFactory: () => ({
-            save: jest.fn(),
             create: jest.fn(() => createOrg)
           })
         },
