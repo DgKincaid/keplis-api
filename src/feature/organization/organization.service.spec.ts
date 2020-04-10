@@ -5,14 +5,12 @@ import * as faker from 'faker';
 
 import { OrganizationService } from './organization.service';
 import { IOrganization } from './interfaces/IOrganization';
-import { OrganizationModule } from './organization.module';
-import { GroupsService } from '../groups/groups.service';
-import { IGroup } from '../groups/interfaces/IGroup';
-import { UsersService } from '../users/users.service';
+
+import { IGroup, GroupDbService, UserDbService } from '../../db';
 
 describe('OrganizationService', () => {
   let service: OrganizationService;
-  let spyGroupsService: GroupsService;
+  let spyGroupsService: GroupDbService;
 
   let createOrg: Partial<IOrganization> = {
     name: faker.company.companyName(),
@@ -38,14 +36,16 @@ describe('OrganizationService', () => {
           })
         },
         {
-          provide: GroupsService,
+          provide: GroupDbService,
           useFactory: () => ({
             create: jest.fn(() => createGroup)
           })
         },
         {
-          provide: UsersService,
+          provide: UserDbService,
           useFactory: () => ({
+            findOneById: jest.fn(),
+            update: jest.fn(),
             addOrganization: jest.fn(),
             addGroup: jest.fn()
           })
@@ -54,7 +54,7 @@ describe('OrganizationService', () => {
     }).compile();
 
     service = module.get<OrganizationService>(OrganizationService);
-    spyGroupsService = module.get<GroupsService>(GroupsService);
+    spyGroupsService = module.get<GroupDbService>(GroupDbService);
   });
 
   it('should be defined', () => {

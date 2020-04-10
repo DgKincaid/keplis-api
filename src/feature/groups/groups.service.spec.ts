@@ -4,7 +4,7 @@ import { getModelToken } from '@nestjs/mongoose';
 import * as faker from 'faker';
 
 import { GroupsService } from './groups.service';
-import { IGroup } from './interfaces/IGroup';
+import { IGroup, GroupDbService } from '../../db';
 
 describe('GroupsService', () => {
   let service: GroupsService;
@@ -22,7 +22,7 @@ describe('GroupsService', () => {
       providers: [
         GroupsService,
         {
-          provide: getModelToken('Group'),
+          provide: GroupDbService,
           useFactory: () => ({
             create: jest.fn(() => createGroup)
           })

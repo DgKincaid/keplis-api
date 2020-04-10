@@ -4,17 +4,15 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
 import { IOrganization } from './interfaces/IOrganization';
-import { GroupsService } from '../groups/groups.service';
-import { IGroup } from '../groups/interfaces/IGroup';
 import { CreateOrganizationDto } from './dto';
-import { UsersService } from '../users/users.service';
+import { GroupDbService, IGroup, UserDbService } from '../../db';
 
 @Injectable()
 export class OrganizationService {
   constructor(
     @InjectModel('Organization') private organizationModel: Model<IOrganization>,
-    private groupService: GroupsService,
-    private usersService: UsersService
+    private groupDbService: GroupDbService,
+    private userDbService: UserDbService,
   ) { }
 
   public async create(createOrg: CreateOrganizationDto, userId: string) {
@@ -25,7 +23,7 @@ export class OrganizationService {
 
     try {
 
-      let group = await this.groupService.create(newGroup as IGroup);
+      let group = await this.groupDbService.create(newGroup as IGroup);
 
       let newOrg: Partial<IOrganization> = {
         name: createOrg.name,
@@ -35,8 +33,12 @@ export class OrganizationService {
 
       organization = await this.organizationModel.create(newOrg);
 
-      this.usersService.addOrganization(userId, organization.id);
-      this.usersService.addGroup(userId, group.id);
+      let user = await this.userDbService.findOneById(userId);
+
+      user = this.userDbService.addOrganization(user, organization.id);
+      user = this.userDbService.addGroup(user, group.id);
+
+      await this.userDbService.update(user);
 
     } catch (error) {
       console.log(error);

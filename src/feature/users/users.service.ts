@@ -16,19 +16,12 @@ export class UsersService {
   }
 
   public async findOnePassword(email: string): Promise<IUser | undefined> {
-    // const user = await this.userModel.findOne({ email }, '+password');
-    // return user;
-
     const user = await this.userDbService.findOneByEmailPass(email);
 
     return user;
   }
 
   public async findOneById(id: string): Promise<IUser | undefined> {
-    // const user = await this.userModel.findById(id);
-
-    // return user;
-
     const user = await this.userDbService.findOneById(id);
 
     return user;
@@ -85,34 +78,5 @@ export class UsersService {
     }
 
     return updatedUser;
-  }
-
-  public async addOrganization(id: string, organizationId: string) {
-
-    try {
-      let user: IUser = await this.userDbService.findOneById(id);
-
-      user.organizations.set(organizationId, organizationId);
-
-      await this.userDbService.update(user);
-    } catch (error) {
-      console.log(error);
-    }
-
-    return;
-  }
-
-  public async addGroup(id: string, groupId: string) {
-    try {
-      let user: IUser = await this.userDbService.findOneById(id);
-
-      user.groups.set(groupId, groupId);
-
-      await this.userDbService.update(user);
-    } catch (error) {
-      console.log(error);
-    }
-
-    return;
   }
 }

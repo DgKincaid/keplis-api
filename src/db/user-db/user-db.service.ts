@@ -94,4 +94,26 @@ export class UserDbService {
 
     return user;
   }
+
+  public addOrganization(user: IUser, organizationId: string) {
+
+    if (!user.organizations) {
+      user.organizations = new Map<string, string>();
+    }
+
+    user.organizations.set(organizationId, organizationId);
+
+    return user;
+  }
+
+  public addGroup(user: IUser, groupId: string) {
+
+    if(!user.groups) {
+      user.groups = new Map<string, string>();
+    }
+
+    user.groups.set(groupId, groupId);
+
+    return user;
+  }
 }
