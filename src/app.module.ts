@@ -15,6 +15,7 @@ import { ProjectModule } from './feature/project/project.module';
 import { OrganizationModule } from './feature/organization/organization.module';
 import { UserTokenModule } from './guards/user-token/user-token.module';
 import { UserDbModule } from './db/user-db/user-db.module';
+import { CommentDbModule } from './db/comment-db/comment-db.module';
 
 @Module({
   imports: [
@@ -38,7 +39,8 @@ import { UserDbModule } from './db/user-db/user-db.module';
     ProjectModule,
     OrganizationModule,
     UserTokenModule,
-    UserDbModule
+    UserDbModule,
+    CommentDbModule
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -1,16 +1,17 @@
 import { Injectable, CanActivate, ExecutionContext, UnauthorizedException } from '@nestjs/common';
+import { UserTokenService } from './user-token.service';
 
 @Injectable()
 export class UserTokenGuard implements CanActivate {
+
+  constructor(private userTokenService: UserTokenService) { }
 
   async canActivate(
     context: ExecutionContext,
   ): Promise<any> {
     const request = context.switchToHttp().getRequest();
 
-    console.log(request);
-
-    let user = null;
+    let user = await this.userTokenService.validateUserToken(request.user.userId);
 
     if(!user) throw new UnauthorizedException();
 

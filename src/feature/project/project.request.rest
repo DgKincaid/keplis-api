@@ -6,21 +6,17 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAd
 ###
 POST http://localhost:3000/organization/5e8a580ff0b9edc691ef1c2e/project
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJzdWIiOiI1ZThhNTdmM2YwYjllZGM2OTFlZjFjMmMiLCJpYXQiOjE1ODYzNjA4MjMsImV4cCI6MTU4NjM2NDQyM30.7b2EQuJxDpI4y3Gmf0x6tW_Vz01l9Qb7l4kQzz7Dfg8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJzdWIiOiI1ZTkwYmI4OGVmNWE4MTU2ZWVjMDZmM2QiLCJpYXQiOjE1ODY1NDYzOTcsImV4cCI6MTU4NjU0OTk5N30.86anDSmpKMMTbAU0OM2mVAbejRzgHpo3HviEF5M7rjE
 
 {
-  "_id": "5e8a57f3f0b9edc691ef1c2c",
-  "email": "test@test.com",
-  "firstName": "John",
-  "lastName": "Wick",
-  "lastLoginDttm": "2020-04-08T14:38:04.218Z",
-  "organizations": {
-    "5e8a580ff0b9edc691ef1c2e": "5e8a580ff0b9edc691ef1c2e"
-  },
-  "groups": {
-    "5e8a580ff0b9edc691ef1c2d": "5e8a580ff0b9edc691ef1c2d"
-  },
-  "createdDttm": "2020-04-05T22:13:07.418Z",
-  "updatedDttm": "2020-04-08T14:38:04.222Z",
-  "__v": 0
+  "_id": "5e90bb88ef5a8156eec06f3d",
+    "email": "test@test.com",
+    "firstName": "John",
+    "lastName": "Wick",
+    "lastLoginDttm": "2020-04-10T18:32:11.831Z",
+    "organizations": {},
+    "groups": {},
+    "createdDttm": "2020-04-10T18:31:36.440Z",
+    "updatedDttm": "2020-04-10T18:32:11.832Z",
+    "__v": 0
 }
