@@ -20,6 +20,7 @@ import { GroupDbModule } from './db/group-db/group-db.module';
 import { OrganizationDbModule } from './db/organization-db/organization-db.module';
 import { StoryDbModule } from './db/story-db/story-db.module';
 import { ProjectDbModule } from './db/project-db/project-db.module';
+import { SprintDbModule } from './db/sprint-db/sprint-db.module';
 
 @Module({
   imports: [
@@ -48,7 +49,8 @@ import { ProjectDbModule } from './db/project-db/project-db.module';
     GroupDbModule,
     OrganizationDbModule,
     StoryDbModule,
-    ProjectDbModule
+    ProjectDbModule,
+    SprintDbModule
   ],
   controllers: [AppController],
   providers: [AppService],
