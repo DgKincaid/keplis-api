@@ -4,7 +4,7 @@ import { JwtService } from '@nestjs/jwt';
 import { hash, compare } from 'bcrypt';
 
 import { UsersService } from '../users/users.service';
-import { IUser } from '../users/interfaces/IUser';
+import { IUser } from '../../db/user-db/IUser';
 
 @Injectable()
 export class AuthService {

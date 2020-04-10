@@ -4,8 +4,8 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
 import { IStory } from './interfaces/IStory';
-import { UsersService } from '../users/users.service';
-import { IUser } from '../users/interfaces/IUser';
+import { IUser } from '../../db/user-db/IUser';
+
 import { IOrganization } from '../organization/interfaces/IOrganization';
 
 @Injectable()

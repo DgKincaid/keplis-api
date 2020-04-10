@@ -5,7 +5,8 @@ import { JoiValidationPipe } from '../../pipes/joi-validation.pipe';
 import { UsersService } from './users.service';
 import { JwtAuthGuard } from '../auth/guards';
 
-import { IUser } from './interfaces/IUser';
+import { IUser } from '../../db/user-db/IUser';
+
 import { UserSchema } from './schema/user.schema';
 import { ApiResponse } from '@nestjs/swagger';
 

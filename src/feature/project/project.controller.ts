@@ -3,10 +3,11 @@ import { Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { ProjectService } from './project.service';
 import { ApiTags, ApiResponse } from '@nestjs/swagger';
 
-import { JwtAuthGuard, UserAuthGuard } from '../auth/guards';
+import { JwtAuthGuard } from '../auth/guards';
+import { UserTokenGuard } from 'src/guards/user-token/user-token.guard';
 
 @ApiTags('project')
-@UseGuards(JwtAuthGuard)
+@UseGuards(JwtAuthGuard, UserTokenGuard)
 @Controller('organization/:orgId/project')
 export class ProjectController {
   constructor(private projectService: ProjectService) { }

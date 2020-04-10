@@ -4,7 +4,7 @@ import { Model } from 'mongoose';
 
 import { IProject } from './interfaces/IProject';
 
-import { IUser } from '../users/interfaces/IUser';
+import { IUser } from '../../db/user-db/IUser';
 
 @Injectable()
 export class ProjectService {

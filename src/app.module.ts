@@ -13,6 +13,8 @@ import { SprintModule } from './feature/sprint/sprint.module';
 import { CommentModule } from './feature/comment/comment.module';
 import { ProjectModule } from './feature/project/project.module';
 import { OrganizationModule } from './feature/organization/organization.module';
+import { UserTokenModule } from './guards/user-token/user-token.module';
+import { UserDbModule } from './db/user-db/user-db.module';
 
 @Module({
   imports: [
@@ -20,7 +22,7 @@ import { OrganizationModule } from './feature/organization/organization.module';
     MongooseModule.forRootAsync({
       imports: [ ConfigModule ],
       useFactory: async (configService: ConfigService) => ({
-        uri: `mongodb://${configService.get<string>('DB_USER')}:${configService.get<string>('DB_PASS')}@${configService.get<string>('DB_URL')}`,
+        uri: `mongodb://${configService.get<string>('DB_USER')}:${configService.get<string>('DB_PASS')}@${configService.get<string>('DB_URL')}/${configService.get<string>('DB_NAME')}`,
         useNewUrlParser: true,
         useUnifiedTopology: true
       }),
@@ -34,7 +36,9 @@ import { OrganizationModule } from './feature/organization/organization.module';
     SprintModule,
     CommentModule,
     ProjectModule,
-    OrganizationModule
+    OrganizationModule,
+    UserTokenModule,
+    UserDbModule
   ],
   controllers: [AppController],
   providers: [AppService],
