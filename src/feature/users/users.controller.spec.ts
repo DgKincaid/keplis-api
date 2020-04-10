@@ -3,7 +3,8 @@ import { getModelToken } from '@nestjs/mongoose';
 
 import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
-import { IUser } from './interfaces/IUser';
+import { IUser } from '../../db/user-db/IUser';
+import { UserDbService } from '../../db/user-db/user-db.service';
 
 jest.mock('./users.service')
 describe('Users Controller', () => {
@@ -13,9 +14,17 @@ describe('Users Controller', () => {
   beforeEach(async () => {
 
     const moduleRef: TestingModule = await Test.createTestingModule({
+      imports: [
+      ],
       controllers: [UsersController],
       providers: [
-        UsersService
+        UsersService,
+        {
+          provide: UserDbService,
+          useFactory: () => ({
+
+          })
+        },
       ]
     }).compile();
 
@@ -26,22 +35,6 @@ describe('Users Controller', () => {
   it('should be defined', () => {
     expect(controller).toBeDefined();
   });
-
-  describe('findAll', () => {
-    const result = [
-      { _id: 1 },
-      { _id: 2 }
-    ];
-
-    it('should return list of users', async () => {
-      jest.spyOn(usersService, 'findAll').mockResolvedValue(result as IUser[]);
-
-      let users = await controller.findAll();
-
-      expect(users).toBeDefined();
-      expect(users.length).toBe(2);
-    })
-  })
 
   describe('findOne', () => {
     const result = { _id: 2 };

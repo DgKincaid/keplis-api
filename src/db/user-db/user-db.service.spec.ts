@@ -1,4 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { getModelToken } from '@nestjs/mongoose';
+
 import { UserDbService } from './user-db.service';
 
 describe('UserDbService', () => {
@@ -6,7 +8,15 @@ describe('UserDbService', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [UserDbService],
+      providers: [
+        UserDbService,
+        {
+          provide: getModelToken('User'),
+          useFactory: () => ({
+
+          })
+        }
+      ],
     }).compile();
 
     service = module.get<UserDbService>(UserDbService);

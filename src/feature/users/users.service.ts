@@ -1,6 +1,6 @@
 import { Injectable, BadRequestException, NotImplementedException } from '@nestjs/common';
 
-import { UserDbService } from 'src/db/user-db/user-db.service';
+import { UserDbService } from '../../db/user-db/user-db.service';
 import { IUser } from '../../db/user-db/IUser';
 
 @Injectable()

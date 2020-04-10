@@ -4,7 +4,7 @@ import { ProjectService } from './project.service';
 import { ApiTags, ApiResponse } from '@nestjs/swagger';
 
 import { JwtAuthGuard } from '../auth/guards';
-import { UserTokenGuard } from 'src/guards/user-token/user-token.guard';
+import { UserTokenGuard } from '../../guards/user-token/user-token.guard';
 
 @ApiTags('project')
 @UseGuards(JwtAuthGuard, UserTokenGuard)

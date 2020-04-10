@@ -1,24 +1,22 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { getModelToken } from '@nestjs/mongoose';
 import { UsersService } from './users.service';
+import { UserDbService } from '../../db/user-db/user-db.service';
 
 describe('UsersService', () => {
   let service: UsersService;
 
   beforeEach(async () => {
-    function mockUserModel(dto: any) {
-      this.data = dto;
-      this.save  = () => {
-        return this.data;
-      };
-    }
 
     const module: TestingModule = await Test.createTestingModule({
+      imports: [
+      ],
       providers: [
         UsersService,
         {
-          provide: getModelToken('User'),
-          useValue: mockUserModel,
+          provide: UserDbService,
+          useFactory: () => ({
+
+          })
         },
       ],
     }).compile();
