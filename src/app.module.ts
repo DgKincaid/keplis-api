@@ -19,6 +19,7 @@ import { CommentDbModule } from './db/comment-db/comment-db.module';
 import { GroupDbModule } from './db/group-db/group-db.module';
 import { OrganizationDbModule } from './db/organization-db/organization-db.module';
 import { StoryDbModule } from './db/story-db/story-db.module';
+import { ProjectDbModule } from './db/project-db/project-db.module';
 
 @Module({
   imports: [
@@ -46,7 +47,8 @@ import { StoryDbModule } from './db/story-db/story-db.module';
     CommentDbModule,
     GroupDbModule,
     OrganizationDbModule,
-    StoryDbModule
+    StoryDbModule,
+    ProjectDbModule
   ],
   controllers: [AppController],
   providers: [AppService],

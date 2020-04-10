@@ -1,23 +1,19 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
 
-import { IProject } from './interfaces/IProject';
-
-import { IUser } from '../../db/user-db/IUser';
+import { IUser, IProject, ProjectDbService } from '../../db';
 
 @Injectable()
 export class ProjectService {
 
   constructor(
-    @InjectModel('Project') private projectModel: Model<IProject>,
+    private projectDbService: ProjectDbService
   ) { }
 
   public async findAll(organizationId: string) {
     let projects;
 
     try {
-      projects = await this.projectModel.find({ organization: organizationId })
+      projects = await this.projectDbService.findAllByOrganization(organizationId);
     } catch (error) {
       console.log(error);
     }
@@ -29,7 +25,7 @@ export class ProjectService {
     let project: IProject;
 
     try {
-      project = await this.projectModel.findById(projectId);
+      project = await this.projectDbService.findOneById(projectId);
 
       if(project.organization !== organizationId) throw new UnauthorizedException();
     } catch (error) {
@@ -48,7 +44,7 @@ export class ProjectService {
     try {
       project.createdBy = user._id;
 
-      newProject = await this.projectModel.create(project);
+      newProject = await this.projectDbService.create(project);
 
     } catch (error) {
       console.log(error);

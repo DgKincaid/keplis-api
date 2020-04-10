@@ -1,11 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { getModelToken } from '@nestjs/mongoose';
 
 import * as faker from 'faker';
 
 import { ProjectService } from './project.service';
-import { IUser } from '../users/interfaces/IUser';
-import { IProject } from './interfaces/IProject';
+
+import { ProjectDbService, IUser, IProject } from '../../db';
 
 describe('ProjectService', () => {
 
@@ -24,10 +23,10 @@ describe('ProjectService', () => {
       providers: [
         ProjectService,
         {
-          provide: getModelToken('Project'),
+          provide: ProjectDbService,
           useFactory: () => ({
-            find: jest.fn(() => [project]),
-            findById: jest.fn(() => project),
+            findAllByOrganization: jest.fn(() => [project]),
+            findOneById: jest.fn(() => project),
             create: jest.fn(() => project)
           })
         }
