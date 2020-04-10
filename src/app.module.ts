@@ -18,6 +18,7 @@ import { UserDbModule } from './db/user-db/user-db.module';
 import { CommentDbModule } from './db/comment-db/comment-db.module';
 import { GroupDbModule } from './db/group-db/group-db.module';
 import { OrganizationDbModule } from './db/organization-db/organization-db.module';
+import { StoryDbModule } from './db/story-db/story-db.module';
 
 @Module({
   imports: [
@@ -44,7 +45,8 @@ import { OrganizationDbModule } from './db/organization-db/organization-db.modul
     UserDbModule,
     CommentDbModule,
     GroupDbModule,
-    OrganizationDbModule
+    OrganizationDbModule,
+    StoryDbModule
   ],
   controllers: [AppController],
   providers: [AppService],

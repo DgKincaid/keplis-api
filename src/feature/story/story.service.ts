@@ -1,18 +1,12 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
 
-import { Model } from 'mongoose';
-
-import { IStory } from './interfaces/IStory';
-import { IUser } from '../../db/user-db/IUser';
-
-import { IOrganization } from '../organization/interfaces/IOrganization';
+import { IUser, IStory, IOrganization, StoryDbService } from '../../db';
 
 @Injectable()
 export class StoryService {
 
   constructor(
-    @InjectModel('Story') private storyModel: Model<IStory>,
+    private storyDbService: StoryDbService
   ) { }
 
   public async findAll(organizationId: string, user: IUser) {
@@ -20,10 +14,9 @@ export class StoryService {
 
     try {
 
-      //TODO: might be a perf hit
-      stories = await this.storyModel.find({ organization: organizationId }).exec((err, obj) => {
-        return obj.map(s => user.groups.has(s.group));
-      })
+      let allStories = await this.storyDbService.findAllByOrganization(organizationId);
+
+      stories = allStories.filter(story => user.groups.has(story.group))
 
     } catch (error) {
       console.log(error);
@@ -36,7 +29,7 @@ export class StoryService {
     let story: IStory;
 
     try {
-      story = await this.storyModel.findById(storyId);
+      story = await this.storyDbService.findOneById(storyId);
 
       if(story.organization !== organizationId || !user.groups.has(story.group)) {
         throw new UnauthorizedException();
@@ -54,14 +47,14 @@ export class StoryService {
     let createdStory: IStory;
 
     story.tasks = new Map<string, string>();
-    story.organization = organization._id;
+    story.organization = organization.id;
     story.owner = user._id;
     story.updatedBy = user._id;
     story.updatedDttm = new Date();
     story.group = organization.group;
 
     try {
-      createdStory = await this.storyModel.create(story);
+      createdStory = await this.storyDbService.create(story);
     } catch (error) {
       console.log(error);
     }

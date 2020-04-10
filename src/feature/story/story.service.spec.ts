@@ -4,6 +4,7 @@ import { getModelToken } from '@nestjs/mongoose';
 import * as faker from 'faker';
 
 import { StoryService } from './story.service';
+import { StoryDbService } from '../../db';
 
 describe('StoryService', () => {
   let service: StoryService;
@@ -13,7 +14,7 @@ describe('StoryService', () => {
       providers: [
         StoryService,
         {
-          provide: getModelToken('Story'),
+          provide: StoryDbService,
           useFactory: () => ({
 
           })
