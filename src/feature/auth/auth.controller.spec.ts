@@ -1,12 +1,11 @@
 import { Test } from '@nestjs/testing';
 import { JwtModule } from '@nestjs/jwt';
-import { getModelToken } from '@nestjs/mongoose';
 
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { LocalStrategy } from './strategy';
-import { UsersModule } from '../users/users.module';
-import { IUser } from '../users/interfaces/IUser';
+
+import { IUser } from '../../db';
 
 jest.mock('./auth.service')
 describe('AuthController', () => {
@@ -20,10 +19,6 @@ describe('AuthController', () => {
       providers: [
         LocalStrategy,
         AuthService
-        // {
-        //   provide: AuthService,
-        //   useValue: AuthServiceMock,
-        // }
       ],
       imports: [
         JwtModule.register({

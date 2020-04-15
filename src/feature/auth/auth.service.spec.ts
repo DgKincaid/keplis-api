@@ -1,12 +1,12 @@
 
 import { TestingModule, Test } from '@nestjs/testing';
+import { InternalServerErrorException } from '@nestjs/common';
 import { JwtService, JwtModule } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 
 import { AuthService } from './auth.service';
 import { UsersService } from '../users/users.service';
-import { InternalServerErrorException } from '@nestjs/common';
-import { IUser } from '../users/interfaces/IUser';
+import { IUser } from '../../db';
 
 jest.mock('bcrypt');
 

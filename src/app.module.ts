@@ -21,6 +21,7 @@ import { OrganizationDbModule } from './db/organization-db/organization-db.modul
 import { StoryDbModule } from './db/story-db/story-db.module';
 import { ProjectDbModule } from './db/project-db/project-db.module';
 import { SprintDbModule } from './db/sprint-db/sprint-db.module';
+import { TaskDbModule } from './db/task-db/task-db.module';
 
 @Module({
   imports: [
@@ -50,7 +51,8 @@ import { SprintDbModule } from './db/sprint-db/sprint-db.module';
     OrganizationDbModule,
     StoryDbModule,
     ProjectDbModule,
-    SprintDbModule
+    SprintDbModule,
+    TaskDbModule
   ],
   controllers: [AppController],
   providers: [AppService],
