@@ -1,0 +1,20 @@
+
+###
+GET http://localhost:3000/organization/5e970a8cc6f4ed280c6defe8/story
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJzdWIiOiI1ZTkwYmI4OGVmNWE4MTU2ZWVjMDZmM2QiLCJpYXQiOjE1ODY5NzIzMjAsImV4cCI6MTU4Njk3NTkyMH0.Eah7ew2xAlvZQ5MDPUqggqhxA1kPQYjjJDHo1I_lHgE
+
+
+###
+POST http://localhost:3000/organization/5e970a8cc6f4ed280c6defe8/story
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJzdWIiOiI1ZTkwYmI4OGVmNWE4MTU2ZWVjMDZmM2QiLCJpYXQiOjE1ODY5NzIzMjAsImV4cCI6MTU4Njk3NTkyMH0.Eah7ew2xAlvZQ5MDPUqggqhxA1kPQYjjJDHo1I_lHgE
+
+ {
+   "title": "test story",
+   "description": "story description",
+   "type": "Bug",
+   "status": "To Do",
+   "effort": "5",
+   "acceptance_criteria": "need to complete the following to accept the story"
+ }

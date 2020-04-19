@@ -2,11 +2,12 @@ import { Module } from '@nestjs/common';
 
 import { ProjectService } from './project.service';
 import { ProjectController } from './project.controller';
-import { UserTokenModule } from '../../guards/user-token/user-token.module';
+import { UserTokenModule, UserOrgModule } from '../../guards';
 
 @Module({
   imports: [
-    UserTokenModule
+    UserTokenModule,
+    UserOrgModule,
   ],
 
   providers: [ ProjectService ],

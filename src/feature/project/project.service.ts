@@ -35,14 +35,13 @@ export class ProjectService {
     return project;
   }
 
-  public async create(user: IUser, project: IProject) {
-
-    if(!user.organizations.has(project.organization)) throw new UnauthorizedException();
+  public async create(userId: string, organizationId: string, project: IProject) {
 
     let newProject: IProject;
 
     try {
-      project.createdBy = user._id;
+      project.createdBy = userId;
+      project.organization = organizationId;
 
       newProject = await this.projectDbService.create(project);
 

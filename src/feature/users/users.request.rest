@@ -4,7 +4,7 @@ GET http://localhost:3000/users
 ###
 GET http://localhost:3000/users
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJzdWIiOiI1ZThhNTdmM2YwYjllZGM2OTFlZjFjMmMiLCJpYXQiOjE1ODYzNTY2ODQsImV4cCI6MTU4NjM2MDI4NH0.BXbxsOBNAjIOEQiqOGqfdGp_ZADc-2vTn2amJHAMw3c
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJzdWIiOiI1ZTkwYmI4OGVmNWE4MTU2ZWVjMDZmM2QiLCJpYXQiOjE1ODY5NTYwNjQsImV4cCI6MTU4Njk1OTY2NH0.Jomd-oy6wQBT16zcBT2CzthAct3yDT8Qx6M_MPKPgSU
 
 ###
 GET http://localhost:3000/users/5e80b4d0650f406b469fbb41

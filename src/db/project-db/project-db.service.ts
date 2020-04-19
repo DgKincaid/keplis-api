@@ -17,6 +17,7 @@ export class ProjectDbService {
     let projects: IProject[];
 
     try {
+      projects = await this.projectModel.find({ organization: orgId })
 
     } catch (error) {
       console.log(error);

@@ -1,13 +1,17 @@
-import { Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { Controller, Get, Param, Post, UseGuards, Request, Body, UsePipes } from '@nestjs/common';
 
 import { ProjectService } from './project.service';
 import { ApiTags, ApiResponse } from '@nestjs/swagger';
 
 import { JwtAuthGuard } from '../auth/guards';
-import { UserTokenGuard } from '../../guards/user-token/user-token.guard';
+
+import { UserTokenGuard, UserOrgGuard } from '../../guards';
+import { JoiValidationPipe } from '../../pipes/joi-validation.pipe';
+
+import { CreateProjectSchema } from './schema/create.schema';
 
 @ApiTags('project')
-@UseGuards(JwtAuthGuard, UserTokenGuard)
+@UseGuards(JwtAuthGuard, UserTokenGuard, UserOrgGuard)
 @Controller('organization/:orgId/project')
 export class ProjectController {
   constructor(private projectService: ProjectService) { }
@@ -16,16 +20,17 @@ export class ProjectController {
   @ApiResponse({ status: 200, description: 'Find all projects in organization'})
   @ApiResponse({ status: 400, description: 'Bad Request.'})
   public async findAll(@Param('orgId') organizationId) {
-    console.log(organizationId);
 
     return await this.projectService.findAll(organizationId);
   }
 
   @Post()
-  @ApiResponse({ status: 200, description: 'Find all projects in organization'})
+  @ApiResponse({ status: 201, description: 'Create project'})
   @ApiResponse({ status: 400, description: 'Bad Request.'})
-  public async create(@Param('orgId') organizationId) {
+  public async create(@Param('orgId') organizationId, @Body(new JoiValidationPipe(CreateProjectSchema)) body, @Request() req) {
 
-    // return await this.projectService.create()
+    let user = req.user;
+
+    return await this.projectService.create(user.userId, organizationId, body)
   }
 }

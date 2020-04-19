@@ -1,7 +1,7 @@
 ###
 POST http://localhost:3000/organization
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJzdWIiOiI1ZThhNTdmM2YwYjllZGM2OTFlZjFjMmMiLCJpYXQiOjE1ODYxMjQ3OTMsImV4cCI6MTU4NjEyODM5M30.33M5EdSvzixMudP6sGbVyzZcaRzU2QSalvKbTYCJpj8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJzdWIiOiI1ZTkwYmI4OGVmNWE4MTU2ZWVjMDZmM2QiLCJpYXQiOjE1ODY5NTYwNjQsImV4cCI6MTU4Njk1OTY2NH0.Jomd-oy6wQBT16zcBT2CzthAct3yDT8Qx6M_MPKPgSU
 
 {
   "name": "New Organization"
@@ -10,7 +10,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAd
 ###
 GET http://localhost:3000/organization
 Content-Type: : application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJzdWIiOiI1ZThhNTdmM2YwYjllZGM2OTFlZjFjMmMiLCJpYXQiOjE1ODYxMzAzMTUsImV4cCI6MTU4NjEzMzkxNX0.4vmVBvq0tBqwifx6thxLJk7SXCAFuYPh0v0syAI_tsI
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJzdWIiOiI1ZTkwYmI4OGVmNWE4MTU2ZWVjMDZmM2QiLCJpYXQiOjE1ODY5NTYwNjQsImV4cCI6MTU4Njk1OTY2NH0.Jomd-oy6wQBT16zcBT2CzthAct3yDT8Qx6M_MPKPgSU
 
 ###
 GET http://localhost:3000/organization/5e8a580ff0b9edc691ef1c2e

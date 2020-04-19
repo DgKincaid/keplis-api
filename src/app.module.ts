@@ -22,6 +22,7 @@ import { StoryDbModule } from './db/story-db/story-db.module';
 import { ProjectDbModule } from './db/project-db/project-db.module';
 import { SprintDbModule } from './db/sprint-db/sprint-db.module';
 import { TaskDbModule } from './db/task-db/task-db.module';
+import { UserOrgModule } from './guards/user-org/user-org.module';
 
 @Module({
   imports: [
@@ -52,7 +53,8 @@ import { TaskDbModule } from './db/task-db/task-db.module';
     StoryDbModule,
     ProjectDbModule,
     SprintDbModule,
-    TaskDbModule
+    TaskDbModule,
+    UserOrgModule
   ],
   controllers: [AppController],
   providers: [AppService],
